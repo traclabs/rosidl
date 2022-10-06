@@ -1,11 +1,8 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(rosidl_adapter)
+project(rosidl_cli)
 
 set(DEPS
-  roscpp
   rospy
-  geometry_msgs
-  rosidl_cli
 )
 
 
@@ -19,8 +16,9 @@ catkin_package(
 
 catkin_python_setup()
 
-file(GLOB python_scripts_DIR "scripts/*.py")
+#file(GLOB python_scripts_DIR "scripts/*.py")
     
-# Python stuff
-catkin_install_python(PROGRAMS ${python_scripts_DIR}
-    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+## Python stuff
+#catkin_install_python(PROGRAMS ${python_scripts_DIR}
+#    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
