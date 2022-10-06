@@ -504,6 +504,22 @@ def parse_message_string(pkg_name, msg_name, message_string):
                 continue
 
         type_string, _, rest = line.partition(' ')
+        
+        # Extra check for non empty lines at the beginning
+        if len(type_string) == 0:
+          clean_line = line.lstrip()
+          type_string, _, rest = clean_line.partition(' ')
+          
+        
+        # Addition to address time and duration types, which do not exist in ROS2 but exist in ROS1 as builtin values
+        if type_string == "time":
+          type_string = "builtin_interfaces/Time"
+        if type_string == "duration":
+          type_string = "builtin_interfaces/Duration"
+        # Another exception for Header
+        if type_string == "Header":
+          type_string = "std_msgs/Header" 
+        
         rest = rest.lstrip()
         if not rest:
             print('Error with:', pkg_name, msg_name, line, file=sys.stderr)
