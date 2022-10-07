@@ -41,14 +41,14 @@ else:
     module @(msg.msg_name)_Constants {
 @[  for constant in msg.constants]@
 @[    if constant.annotations.get('comment', [])]@
-      @@verbatim (language="comment", text=
+@#      @@verbatim (language="comment", text=
 @[      for i, line in enumerate(constant.annotations['comment'])]@
-        @(string_to_idl_string_literal(line))@
+        //@(string_to_idl_string_literal(line))@
 @[        if i < len(constant.annotations.get('comment')) - 1]@
  "\n"@
 @[        end if]@
 @[      end for]@
-)
+
 @[    end if]@
       const @(get_idl_type(constant.type)) @(constant.name) = @(to_idl_literal(get_idl_type(constant.type), constant.value));
 @[  end for]@
@@ -56,14 +56,14 @@ else:
 @[end if]@
 @#
 @[if msg.annotations.get('comment', [])]@
-    @@verbatim (language="comment", text=@
+@#    @@verbatim (language="comment", text=@
 @[  for i, line in enumerate(msg.annotations['comment'])]
-      @(string_to_idl_string_literal(line))@
+      //@(string_to_idl_string_literal(line))@
 @[    if i < len(msg.annotations.get('comment')) - 1]@
  "\n"@
 @[    end if]@
 @[  end for]@
-)
+
 @[end if]@
     struct @(msg.msg_name) {
 @[if msg.fields]@
@@ -72,14 +72,14 @@ else:
 
 @[    end if]@
 @[    if field.annotations.get('comment', [])]@
-      @@verbatim (language="comment", text=@
+ @#     @@verbatim (language="comment", text=@
 @[      for j, line in enumerate(field.annotations['comment'])]
-        @(string_to_idl_string_literal(line))@
+        //@(string_to_idl_string_literal(line))@
 @[        if j < len(field.annotations.get('comment')) - 1]@
  "\n"@
 @[        end if]@
 @[      end for]@
-)
+
 @[    end if]@
 @[    if field.default_value is not None]@
       @@default (value=@(to_idl_literal(get_idl_type(field.type), field.default_value)))
@@ -98,6 +98,6 @@ idl_type = get_idl_type_identifier(idl_type)
       @(idl_type) @(field.name);
 @[  end for]@
 @[else]@
-      uint8 structure_needs_at_least_one_member;
+      char structure_needs_at_least_one_member;
 @[end if]@
     };

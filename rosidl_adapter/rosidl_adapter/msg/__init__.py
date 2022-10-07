@@ -43,13 +43,13 @@ def convert_msg_to_idl(package_dir, package_name, input_file, output_dir):
 MSG_TYPE_TO_IDL = {
     'bool': 'boolean',
     'byte': 'octet',
-    'char': 'uint8',
-    'int8': 'int8',
-    'uint8': 'uint8',
+    'char': 'char', #char
+    'int8': 'octet', #int8
+    'uint8': 'octet', #uint8
     'int16': 'int16',
     'uint16': 'uint16',
-    'int32': 'int32',
-    'uint32': 'uint32',
+    'int32': 'long', #int32
+    'uint32': 'unsigned long', #uint32
     'int64': 'int64',
     'uint64': 'uint64',
     'float32': 'float',

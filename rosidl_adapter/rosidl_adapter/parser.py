@@ -513,10 +513,10 @@ def parse_message_string(pkg_name, msg_name, message_string):
         
         # Addition to address time and duration types, which do not exist in ROS2 but exist in ROS1 as builtin values
         if type_string == "time":
-          type_string = "builtin_interfaces/Time"
+          type_string = "std_msgs/Time"
         if type_string == "duration":
-          type_string = "builtin_interfaces/Duration"
-        # Another exception for Header
+          type_string = "std_msgs/Duration"
+        # An exception for Header
         if type_string == "Header":
           type_string = "std_msgs/Header" 
         

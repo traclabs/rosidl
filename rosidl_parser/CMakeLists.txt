@@ -1,24 +1,27 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(rosidl_parser NONE)
+project(rosidl_parser)
 
-find_package(ament_cmake REQUIRED)
-find_package(ament_cmake_python REQUIRED)
 
-ament_python_install_package(${PROJECT_NAME})
+set(DEPS
+  rospy
+#  rosidl_adapter
+)
 
-if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  ament_lint_auto_find_test_dependencies()
-endif()
+find_package(catkin REQUIRED COMPONENTS ${DEPS})
 
-ament_package()
+catkin_package(
+#  INCLUDE_DIRS ${CMAKE_CURRENT_BINARY_DIR}/..
+  LIBRARIES 
+  CATKIN_DEPENDS ${DEPS}
+)
 
-if(BUILD_TESTING)
-  find_package(ament_cmake_pytest REQUIRED)
-  ament_add_pytest_test(pytest test)
-endif()
+catkin_python_setup()
 
-install(
-  PROGRAMS bin/idl2png
-  DESTINATION lib/${PROJECT_NAME})
+# Python stuff
+catkin_install_python(PROGRAMS bin/idl2png
+    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+    
+
+
+
